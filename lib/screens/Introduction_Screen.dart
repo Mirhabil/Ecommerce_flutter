@@ -9,36 +9,56 @@ class IntroductionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body:Center(
-          child:Padding(padding: EdgeInsets.only(left: 78,right: 78),child: Column(
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.only(left: 78, right: 78),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 120,),
-              Row(mainAxisSize: MainAxisSize.min,
+              SizedBox(height: 120),
+              Row(
+                mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(Icons.account_circle_rounded, size: 54,),
-                  Text("Logo",
-                    style: GoogleFonts.cormorantGaramond(color: Color(0xFF434F67),
-                        fontSize: 44,
-                        fontWeight: FontWeight.bold),)
-
-
+                  Icon(Icons.account_circle_rounded, size: 54),
+                  Text(
+                    "Logo",
+                    style: GoogleFonts.cormorantGaramond(
+                      color: Color(0xFF434F67),
+                      fontSize: 44,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
-              SizedBox(height: 170,),
-              CustomButton.purple("Login"),
-              SizedBox(height: 60,),
-              CustomButton.purple("Sign Up")
-
-
+              SizedBox(height: 170),
+              CustomButton.purple(
+                "Login",
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0xFF7C3375).withValues(alpha: 0.2),
+                    offset: Offset(5, 5),
+                    blurRadius: 10,
+                    spreadRadius: 0,
+                  ),
+                ],
+              ),
+              SizedBox(height: 60),
+              CustomButton.purple(
+                "Sign Up",
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0xFF7C3375).withValues(alpha: 0.2),
+                    offset: Offset(5, 5),
+                    blurRadius: 10,
+                    spreadRadius: 0,
+                  ),
+                ],
+              ),
             ],
-          ),)
-
-        )
-
-
-
+          ),
+        ),
+      ),
     );
   }
 }
