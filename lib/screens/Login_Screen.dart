@@ -1,4 +1,5 @@
 import 'package:ecommerce_flutter/custom_widgets/Custom_Button.dart';
+import 'package:ecommerce_flutter/custom_widgets/Custom_Container.dart';
 import 'package:ecommerce_flutter/custom_widgets/Custom_TextField.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,32 +32,10 @@ class LoginScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 69),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(9, 9),
-                    blurRadius: 16,
-                    color: Color(0xFF6295E2).withValues(alpha: 0.11),
-                  ),
-                  BoxShadow(
-                    offset: Offset(-9, -9),
-                    blurRadius: 16,
-                    color: Color(0xFFFFFFFF).withValues(alpha: 0.25),
-                  ),
-                ],
-              ),
-              width: 323,
-              height: 261,
-              child: Column(
-                children: [
-                  CustomTextField.login("USERNAME", 54, false),
-                  CustomTextField.login("PASSWORD", 38, true),
-                ],
-              ),
-            ),
+            CustomContainer(widthOfContainer: 323, heightOfContainer: 261, textFieldWidgetList: [
+              CustomTextField.login("USERNAME", 54, false),
+              CustomTextField.login("PASSWORD", 38, true),
+            ]),
             SizedBox(height: 82),
             CustomButton.purple(
               "Next",
