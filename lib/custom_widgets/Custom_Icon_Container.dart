@@ -12,7 +12,6 @@ class CustomIconContainer extends StatelessWidget {
     return Container(
       width: 42,
       height: 42,
-      margin: EdgeInsets.only(top: 74, left: 21),
       decoration: BoxDecoration(
         color: Colors.white,
         shape: BoxShape.circle,

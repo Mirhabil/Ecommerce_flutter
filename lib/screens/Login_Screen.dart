@@ -35,7 +35,7 @@ class LoginScreen extends StatelessWidget {
             CustomContainer(widthOfContainer: 323, heightOfContainer: 261, textFieldWidgetList: [
               CustomTextField.login("USERNAME", 54, false),
               CustomTextField.login("PASSWORD", 38, true),
-            ]),
+            ],isCenterColumn: false,),
             SizedBox(height: 82),
             CustomButton.purple(
               "Next",

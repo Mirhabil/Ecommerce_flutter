@@ -1,4 +1,7 @@
+import 'package:ecommerce_flutter/screens/Home_Screen.dart';
 import 'package:ecommerce_flutter/screens/Introduction_Screen.dart';
+import 'package:ecommerce_flutter/screens/Login_Screen.dart';
+import 'package:ecommerce_flutter/screens/SignUp_Screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: IntroductionScreen(),
+      home: HomeScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

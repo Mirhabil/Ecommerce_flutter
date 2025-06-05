@@ -4,12 +4,17 @@ import 'package:flutter/material.dart';
 import 'Custom_TextField.dart';
 
 class CustomContainer extends StatelessWidget {
-
   double widthOfContainer;
   double heightOfContainer;
   List<Widget> textFieldWidgetList;
+  bool isCenterColumn;
 
-  CustomContainer({required this.widthOfContainer,required this.heightOfContainer,required this.textFieldWidgetList});
+  CustomContainer({
+    required this.widthOfContainer,
+    required this.heightOfContainer,
+    required this.textFieldWidgetList,
+    required this.isCenterColumn,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +38,8 @@ class CustomContainer extends StatelessWidget {
       width: widthOfContainer,
       height: heightOfContainer,
       child: Column(
+        mainAxisAlignment:
+            isCenterColumn ? MainAxisAlignment.center : MainAxisAlignment.start,
         children: textFieldWidgetList,
       ),
     );

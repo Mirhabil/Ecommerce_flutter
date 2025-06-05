@@ -14,7 +14,7 @@ class SignUpScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomIconContainer(Icons.arrow_back),
+          Padding(padding: EdgeInsets.only(top: 74, left: 21),child: CustomIconContainer(Icons.arrow_back),),
           SizedBox(height: 53),
           Padding(
             padding: EdgeInsets.only(left: 24, right: 28),
@@ -31,7 +31,7 @@ class SignUpScreen extends StatelessWidget {
                       CustomTextField.signup("Email", 28, false),
                       CustomTextField.signup("PASSWORD", 24, false),
                       CustomTextField.signup("CONFIRM PASSWORD", 28, true),
-                    ],
+                    ],isCenterColumn: false,
                   ),
                 ),
                 SizedBox(height: 115),
