@@ -16,7 +16,12 @@ class TransactionScreen extends StatelessWidget {
           children: [
             Row(
               children: [
-                CustomIconContainer(Icons.arrow_back),
+                GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child:CustomIconContainer(Icons.arrow_back),
+                ),
                 SizedBox(width: 45),
                 Text(
                   "Transactions",
@@ -98,5 +103,6 @@ class TransactionScreen extends StatelessWidget {
         ),
       ),
     );
+
   }
 }

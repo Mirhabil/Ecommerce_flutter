@@ -9,14 +9,19 @@ class PromocodeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
+      body:  Padding(
         padding: EdgeInsets.only(top: 60, left: 30, right: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Row(
               children: [
-                CustomIconContainer(Icons.arrow_back),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child:CustomIconContainer(Icons.arrow_back),
+                ),
                 SizedBox(width: 45),
                 Text(
                   "Promocodes",
@@ -164,6 +169,7 @@ class PromocodeScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ) ;
+
   }
 }

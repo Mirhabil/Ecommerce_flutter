@@ -19,7 +19,13 @@ class BranchesScreen extends StatelessWidget {
               padding: EdgeInsets.only(top: 87),
               child: Row(
                 children: [
-                  CustomIconContainer(Icons.arrow_back),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child:   CustomIconContainer(Icons.arrow_back),
+                  ),
+
                   Padding(
                     padding: EdgeInsets.only(left: 44),
                     child: Text(
@@ -63,7 +69,7 @@ class BranchesScreen extends StatelessWidget {
                                 padding: EdgeInsets.only(left: 37, right: 32),
                                 child: Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       branchesList[index].number1,
@@ -96,6 +102,7 @@ class BranchesScreen extends StatelessWidget {
         ),
       ),
     );
+
   }
 }
 

@@ -1,4 +1,6 @@
 import 'package:ecommerce_flutter/custom_widgets/Custom_Button.dart';
+import 'package:ecommerce_flutter/screens/Login_Screen.dart';
+import 'package:ecommerce_flutter/screens/SignUp_Screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,7 +10,7 @@ class IntroductionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       body: Center(
         child: Padding(
           padding: EdgeInsets.only(left: 78, right: 78),
@@ -32,29 +34,44 @@ class IntroductionScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 170),
-              CustomButton.purple(
-                "Login",
-                boxShadow: [
-                  BoxShadow(
-                    color: Color(0xFF7C3375).withValues(alpha: 0.2),
-                    offset: Offset(5, 5),
-                    blurRadius: 10,
-                    spreadRadius: 0,
-                  ),
-                ],
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                  );
+                },
+                child: CustomButton.purple(
+                  "Login",
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0xFF7C3375).withValues(alpha: 0.2),
+                      offset: Offset(5, 5),
+                      blurRadius: 10,
+                      spreadRadius: 0,
+                    ),
+                  ],
+                ),
               ),
+
               SizedBox(height: 60),
-              CustomButton.purple(
-                "Sign Up",
-                boxShadow: [
-                  BoxShadow(
-                    color: Color(0xFF7C3375).withValues(alpha: 0.2),
-                    offset: Offset(5, 5),
-                    blurRadius: 10,
-                    spreadRadius: 0,
-                  ),
-                ],
-              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen(),));
+                },
+                child: CustomButton.purple(
+                  "Sign Up",
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0xFF7C3375).withValues(alpha: 0.2),
+                      offset: Offset(5, 5),
+                      blurRadius: 10,
+                      spreadRadius: 0,
+                    ),
+                  ],
+                ),
+              )
+
             ],
           ),
         ),

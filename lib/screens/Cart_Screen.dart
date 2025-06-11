@@ -11,8 +11,7 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
+    return Padding(
         padding: EdgeInsets.only(top: 50, left: 29, right: 31),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -86,8 +85,7 @@ class CartScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }
 

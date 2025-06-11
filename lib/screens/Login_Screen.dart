@@ -1,3 +1,4 @@
+import 'package:ecommerce_flutter/Scaffold_Second.dart';
 import 'package:ecommerce_flutter/custom_widgets/Custom_Button.dart';
 import 'package:ecommerce_flutter/custom_widgets/Custom_Container.dart';
 import 'package:ecommerce_flutter/custom_widgets/Custom_TextField.dart';
@@ -11,7 +12,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
+      body:  Padding(
         padding: EdgeInsets.symmetric(horizontal: 26),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -37,24 +38,31 @@ class LoginScreen extends StatelessWidget {
               CustomTextField.login("PASSWORD", 38, true),
             ],isCenterColumn: false,),
             SizedBox(height: 82),
-            CustomButton.purple(
-              "Next",
-              boxShadow: [
-                BoxShadow(
-                  offset: Offset(9, 9),
-                  blurRadius: 16,
-                  color: Color(0xFF6295E2).withValues(alpha: 0.11),
-                ),
-                BoxShadow(
-                  offset: Offset(-9, -9),
-                  blurRadius: 16,
-                  color: Color(0xFFFFFFFF).withValues(alpha: 0.25),
-                ),
-              ],
-            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ScaffoldSecond(),));
+              },
+              child:  CustomButton.purple(
+                "Next",
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(9, 9),
+                    blurRadius: 16,
+                    color: Color(0xFF6295E2).withValues(alpha: 0.11),
+                  ),
+                  BoxShadow(
+                    offset: Offset(-9, -9),
+                    blurRadius: 16,
+                    color: Color(0xFFFFFFFF).withValues(alpha: 0.25),
+                  ),
+                ],
+              ),
+            )
+
           ],
         ),
       ),
     );
+
   }
 }

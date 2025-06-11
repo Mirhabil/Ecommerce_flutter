@@ -1,5 +1,7 @@
 import 'package:ecommerce_flutter/custom_widgets/Custom_Button_Settings.dart';
 import 'package:ecommerce_flutter/custom_widgets/Custom_Icon_Container.dart';
+import 'package:ecommerce_flutter/screens/Promocode_Screen.dart';
+import 'package:ecommerce_flutter/screens/Transaction_Screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,8 +11,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
+    return Padding(
         padding: EdgeInsets.only(top: 60, left: 33, right: 27),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -68,15 +69,25 @@ class SettingsScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 49),
-            CustomButtonSettings(
-              "Transactions",
-              Icons.monetization_on_outlined,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => TransactionScreen(),));
+              },
+              child: CustomButtonSettings(
+                "Transactions",
+                Icons.monetization_on_outlined,
+              ),
             ),
+           
             SizedBox(height: 36),
-            CustomButtonSettings("Promocodes", Icons.card_giftcard),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => PromocodeScreen(),));
+              },
+              child:  CustomButtonSettings("Promocodes", Icons.card_giftcard),
+            )
           ],
         ),
-      ),
-    );
+      );
   }
 }

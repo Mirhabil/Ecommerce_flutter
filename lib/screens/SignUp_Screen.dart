@@ -14,7 +14,13 @@ class SignUpScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(padding: EdgeInsets.only(top: 74, left: 21),child: CustomIconContainer(Icons.arrow_back),),
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child:Padding(padding: EdgeInsets.only(top: 74, left: 21),child: CustomIconContainer(Icons.arrow_back),),
+          ),
+
           SizedBox(height: 53),
           Padding(
             padding: EdgeInsets.only(left: 24, right: 28),
@@ -56,5 +62,6 @@ class SignUpScreen extends StatelessWidget {
         ],
       ),
     );
+
   }
 }
