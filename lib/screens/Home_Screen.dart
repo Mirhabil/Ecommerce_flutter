@@ -106,7 +106,7 @@ class HomeScreen extends StatelessWidget {
               CustomChipGroup(["New 21", "Trending", "Recent"]),
               SizedBox(height: 54),
 
-              GridView.builder(
+              MediaQuery.removePadding(removeTop: true,context: context, child:GridView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: imagesList.length,
@@ -118,7 +118,8 @@ class HomeScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return ProductItem(imagesList[index],197,239);
                 },
-              ),
+              ), )
+
             ],
           ),
         ),
