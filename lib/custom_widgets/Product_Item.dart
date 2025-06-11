@@ -6,7 +6,7 @@ class ProductItem extends StatelessWidget {
   double widthOfContainer;
   double heightOfContainer;
 
-  ProductItem(this.imageName,this.widthOfContainer,this.heightOfContainer);
+  ProductItem({ required this.imageName, required this.widthOfContainer, required this.heightOfContainer});
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +16,13 @@ class ProductItem extends StatelessWidget {
       isCenterColumn: true,
       textFieldWidgetList: [
         Center(
-          child:Image.asset(
+          child: Image.asset(
             imageName,
             width: 84,
             height: 87,
             fit: BoxFit.fill,
           ),
-        )
-
+        ),
       ],
     );
   }

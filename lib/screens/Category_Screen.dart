@@ -14,8 +14,9 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.only(top: 75),
+        padding: EdgeInsets.only(left: 30,right: 30,top: 75),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             CustomSearchWidget(),
             SizedBox(height: 44),
@@ -28,7 +29,7 @@ class CategoryScreen extends StatelessWidget {
                   crossAxisCount: 2,
                   crossAxisSpacing: 25,
                   mainAxisSpacing: 49,
-                  childAspectRatio: 0.76,
+                  // childAspectRatio: 0.76,
                 ),
                 itemCount: categoryItemsList.length,
                 itemBuilder: (context, index) {

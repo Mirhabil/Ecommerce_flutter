@@ -82,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: EdgeInsets.only(left: index != 0 ? 18 : 0),
-                    child: ProductItem(imagesList[index], 137, 166),
+                    child: ProductItem(imageName:  imagesList[index], widthOfContainer: 137, heightOfContainer: 166),
                   );
                 },
               ),
@@ -92,9 +92,10 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: 54),
 
             MediaQuery.removePadding(
-              removeTop: true,
+              removeTop: false,
               context: context,
               child: GridView.builder(
+                padding: EdgeInsets.zero,
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: imagesList.length,
@@ -102,9 +103,10 @@ class HomeScreen extends StatelessWidget {
                   crossAxisCount: 2,
                   crossAxisSpacing: 32,
                   mainAxisSpacing: 22,
+                  childAspectRatio: 197/239
                 ),
                 itemBuilder: (context, index) {
-                  return ProductItem(imagesList[index], 197, 239);
+                  return ProductItem(imageName:  imagesList[index], widthOfContainer:  197,  heightOfContainer: 239);
                 },
               ),
             ),
