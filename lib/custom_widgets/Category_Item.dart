@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 class CategoryItem extends StatelessWidget {
   String imageName;
   String brandName;
-  int price;
+  double price;
 
   CategoryItem(this.imageName, this.brandName, this.price);
 
@@ -30,7 +30,7 @@ class CategoryItem extends StatelessWidget {
                 ),
               ],
             ),
-            child: Image.asset(
+            child: Image.network(
               imageName,
               width: 138,
               height: 182,

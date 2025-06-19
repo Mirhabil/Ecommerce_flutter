@@ -16,7 +16,7 @@ class ProductItem extends StatelessWidget {
       isCenterColumn: true,
       textFieldWidgetList: [
         Center(
-          child: Image.asset(
+          child: Image.network(
             imageName,
             width: 84,
             height: 87,

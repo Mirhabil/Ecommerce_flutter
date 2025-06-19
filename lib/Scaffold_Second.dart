@@ -1,3 +1,4 @@
+import 'package:ecommerce_flutter/cubits/home/Home_Cubit.dart';
 import 'package:ecommerce_flutter/screens/Branches_Screen.dart';
 import 'package:ecommerce_flutter/screens/Cart_Screen.dart';
 import 'package:ecommerce_flutter/screens/Category_Screen.dart';
@@ -10,6 +11,7 @@ import 'package:ecommerce_flutter/screens/Settings_Screen.dart';
 import 'package:ecommerce_flutter/screens/Transaction_Screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ScaffoldSecond extends StatefulWidget {
   const ScaffoldSecond({super.key});
@@ -20,6 +22,7 @@ class ScaffoldSecond extends StatefulWidget {
 
 class _ScaffoldSecondState extends State<ScaffoldSecond> {
   int pageIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,10 +34,9 @@ class _ScaffoldSecondState extends State<ScaffoldSecond> {
         },
         currentIndex: pageIndex,
 
-
         items: [
           BottomNavigationBarItem(
-            icon: Image.asset("assets/Vector.png",color: Colors.grey,),
+            icon: Image.asset("assets/Vector.png", color: Colors.grey),
             label: "",
           ),
           BottomNavigationBarItem(
@@ -57,7 +59,13 @@ class _ScaffoldSecondState extends State<ScaffoldSecond> {
       ),
       body: IndexedStack(
         index: pageIndex,
-        children: [HomeScreen(),CategoryScreen(),ProductScreen(),FavoritesScreen(),SettingsScreen()],
+        children: [
+          HomeScreen(),
+          CategoryScreen(),
+          CartScreen(),
+          FavoritesScreen(),
+          SettingsScreen(),
+        ],
       ),
     );
   }
