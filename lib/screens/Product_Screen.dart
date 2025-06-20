@@ -33,6 +33,7 @@ class ProductScreen extends StatelessWidget {
                       fit: BoxFit.fill,
                       image: NetworkImage(clothes.clothesImage),
                       height: 436,
+                      width: double.infinity,
                     ),
                   ),
                   Positioned(
@@ -45,6 +46,27 @@ class ProductScreen extends StatelessWidget {
                     top: 48,
                     left: 34,
                   ),
+
+                  Positioned(right: 27,
+                      top:47,
+                      child: Container(
+                    height: 30,
+                    width: 62,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: [
+                        BoxShadow(
+                        offset: Offset(1, 2),
+                        blurRadius: 3,
+                        color: Color(0xFF687C98).withAlpha(15),
+                      ),
+                    ],
+                      color: Colors.white,
+                    ),
+                    child: Center(
+                      child: Icon(Icons.favorite_border_outlined),
+                    )
+                  ))
                 ],
               ),
               SizedBox(height: 58),
