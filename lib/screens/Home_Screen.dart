@@ -102,7 +102,7 @@ class HomeScreen extends StatelessWidget {
                                 MaterialPageRoute(
                                   builder:
                                       (context) => ProductScreen(
-                                        clothes: state.clothesModel[index],
+                                        clothesId: state.clothesModel[index].clothesId,
                                       ),
                                 ),
                               );
@@ -148,8 +148,7 @@ class HomeScreen extends StatelessWidget {
                                 MaterialPageRoute(
                                   builder:
                                       (context) => ProductScreen(
-                                        clothes:
-                                            state.filteredClothesModel[index],
+                                        clothesId: state.filteredClothesModel[index].clothesId,
                                       ),
                                 ),
                               );

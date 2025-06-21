@@ -15,6 +15,7 @@ class FavoritesScreen extends StatelessWidget {
   List<ClothesModel> clothes;
 
   FavoritesScreen(this.clothes);
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -60,10 +61,18 @@ class FavoritesScreen extends StatelessWidget {
                         itemCount: state.clothes.length,
                         itemBuilder: (context, index) {
                           return InkWell(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen(clothes: state.clothes[index]),));
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => ProductScreen(
+                                        clothesId: state.clothes[index].clothesId,
+                                      ),
+                                ),
+                              );
                             },
-                            child:       Container(
+                            child: Container(
                               margin: EdgeInsets.only(top: index != 0 ? 24 : 0),
                               child: Stack(
                                 children: [
@@ -101,22 +110,27 @@ class FavoritesScreen extends StatelessWidget {
                                             Row(
                                               children: [
                                                 Text(
-                                                  state.clothes[index].clothesName
+                                                  state
+                                                      .clothes[index]
+                                                      .clothesName
                                                       .substring(
-                                                    0,
-                                                    (state.clothes[index]
-                                                        .clothesName
-                                                        .length /
-                                                        2)
-                                                        .toInt(),
-                                                  ),
+                                                        0,
+                                                        (state
+                                                                    .clothes[index]
+                                                                    .clothesName
+                                                                    .length /
+                                                                2)
+                                                            .toInt(),
+                                                      ),
                                                   style:
-                                                  GoogleFonts.cormorantGaramond(
-                                                    fontSize: 12,
-                                                    fontWeight:
-                                                    FontWeight.bold,
-                                                    color: Color(0xFF31405D),
-                                                  ),
+                                                      GoogleFonts.cormorantGaramond(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Color(
+                                                          0xFF31405D,
+                                                        ),
+                                                      ),
                                                 ),
                                                 Padding(
                                                   padding: EdgeInsets.only(
@@ -136,10 +150,12 @@ class FavoritesScreen extends StatelessWidget {
                                                 Text(
                                                   "Color",
                                                   style:
-                                                  GoogleFonts.cormorantGaramond(
-                                                    fontSize: 12,
-                                                    color: Color(0xFF31405D),
-                                                  ),
+                                                      GoogleFonts.cormorantGaramond(
+                                                        fontSize: 12,
+                                                        color: Color(
+                                                          0xFF31405D,
+                                                        ),
+                                                      ),
                                                 ),
                                                 Padding(
                                                   padding: EdgeInsets.only(
@@ -160,12 +176,15 @@ class FavoritesScreen extends StatelessWidget {
                                             Row(
                                               children: [
                                                 Text(
-                                                  state.clothes[index].price.toString(),
+                                                  state.clothes[index].price
+                                                      .toString(),
                                                   style:
-                                                  GoogleFonts.cormorantGaramond(
-                                                    fontSize: 16,
-                                                    color: Color(0xFF834E7F),
-                                                  ),
+                                                      GoogleFonts.cormorantGaramond(
+                                                        fontSize: 16,
+                                                        color: Color(
+                                                          0xFF834E7F,
+                                                        ),
+                                                      ),
                                                 ),
                                                 Padding(
                                                   padding: EdgeInsets.only(
@@ -202,8 +221,7 @@ class FavoritesScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
-                          ) ;
-
+                          );
                         },
                       ),
                     ),

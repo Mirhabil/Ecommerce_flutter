@@ -12,22 +12,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductScreen extends StatelessWidget {
-  ClothesModel clothes;
+  int clothesId;
 
-  ProductScreen({required this.clothes});
+  ProductScreen({required this.clothesId});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => ProductsCubit()),
+          BlocProvider(create: (context) => ProductsCubit()..fetchClothesById(clothesId)),
           BlocProvider(create: (context) => HomeCubit(),)
         ],
         child: BlocBuilder<ProductsCubit,ProductsState>(builder: (context, state) {
           if(state is LoadingState){
             return Center(child: CircularProgressIndicator(),);
-          }else if(state is LoadedState){
+          }
+          else if(state is LoadedState){
             final productsCubit=context.read<ProductsCubit>();
             final homeCubit=context.read<HomeCubit>();
             return  SingleChildScrollView(
@@ -44,7 +45,7 @@ class ProductScreen extends StatelessWidget {
                           ),
                           child: Image(
                             fit: BoxFit.fill,
-                            image: NetworkImage(clothes.clothesImage),
+                            image: NetworkImage(state.clothes.clothesImage),
                             height: 436,
                             width: double.infinity,
                           ),
@@ -59,14 +60,13 @@ class ProductScreen extends StatelessWidget {
                           top: 48,
                           left: 34,
                         ),
-
                         Positioned(
                           right: 27,
                           top: 48,
-                          child: GestureDetector(
+                          child: InkWell(
                             onTap: () {
-                              productsCubit.updateFavorite(clothes.clothesId, clothes.isFavorite );
-                              homeCubit.fetchClothes();
+                              productsCubit.updateFavorite(state.clothes.clothesId, state.clothes.isFavorite );
+                             // homeCubit.fetchClothes();
                               //updateFavorite(clothes.clothesId, clothes.isFavorite);
                             },
                             child: Container(
@@ -84,7 +84,7 @@ class ProductScreen extends StatelessWidget {
                                 color: Colors.white,
                               ),
                               child: Center(
-                                child: Icon(Icons.favorite_border_outlined),
+                                child: Icon(state.clothes.isFavorite? Icons.favorite : Icons.favorite_border_outlined),
                               ),
                             ),
                           ),
@@ -101,7 +101,7 @@ class ProductScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                clothes.clothesName,
+                                state.clothes.clothesName,
                                 style: GoogleFonts.cormorantGaramond(
                                   fontSize: 27,
                                   color: Color(0xFF31405D),
@@ -117,7 +117,7 @@ class ProductScreen extends StatelessWidget {
                             ],
                           ),
                           Text(
-                            clothes.clothesCompany,
+                            state.clothes.clothesCompany,
                             style: GoogleFonts.cormorantGaramond(
                               fontSize: 18,
                               color: Color(0xFF31405D),
