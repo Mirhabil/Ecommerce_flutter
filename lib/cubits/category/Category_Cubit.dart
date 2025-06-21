@@ -35,6 +35,7 @@ class CategoryCubit extends Cubit<CategoryState> {
             clothesItem['stock'] ?? 0,
             clothesItem['totalStock'] ?? 0,
             clothesItem['clothesImage'] ?? '',
+            clothesItem['favorite']
           );
         }).toList();
 

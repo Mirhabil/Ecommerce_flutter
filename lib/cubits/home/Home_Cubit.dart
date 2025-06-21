@@ -6,6 +6,7 @@ import 'package:ecommerce_flutter/cubits/home/Home_State.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+List<ClothesModel> clothes=[];
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(LoadingState());
 
@@ -35,8 +36,13 @@ class HomeCubit extends Cubit<HomeState> {
         item['stock'] ?? 0,
         item['totalStock'] ?? 0,
         item['clothesImage'] ?? '',
+        item['favorite']
 
       )).toList();
+
+      print("Main List: $clothesList");
+
+      clothes=clothesList.where((item)=> item.isFavorite==true).toList();
 
       filteredClothesList = clothesList.where((item) => item.isNew).toList();
       print("Filtered clothes: $filteredClothesList");
@@ -80,6 +86,7 @@ class ClothesModel {
   int stock;
   int totalStock;
   String clothesImage;
+  bool isFavorite;
 
   ClothesModel(
     this.clothesId,
@@ -93,5 +100,6 @@ class ClothesModel {
     this.stock,
     this.totalStock,
     this.clothesImage,
+    this.isFavorite
   );
 }

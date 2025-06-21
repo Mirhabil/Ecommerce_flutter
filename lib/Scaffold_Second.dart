@@ -57,16 +57,13 @@ class _ScaffoldSecondState extends State<ScaffoldSecond> {
           ),
         ],
       ),
-      body: IndexedStack(
-        index: pageIndex,
-        children: [
-          HomeScreen(),
-          CategoryScreen(),
-          CartScreen(),
-          FavoritesScreen(),
-          SettingsScreen(),
-        ],
-      ),
+      body:[
+        HomeScreen(),
+        CategoryScreen(),
+        FavoritesScreen(clothes),
+        CartScreen(),
+        SettingsScreen(),
+      ][pageIndex],
     );
   }
 }
