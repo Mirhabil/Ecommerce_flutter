@@ -6,6 +6,7 @@ class LoadingState extends CartsState{}
 
 class LoadedState extends CartsState{
   final List<ViewType> listOfCarts;
-  LoadedState(this.listOfCarts);
+  double totalPriceOfItems;
+  LoadedState(this.listOfCarts,this.totalPriceOfItems);
 }
 

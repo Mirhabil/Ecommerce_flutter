@@ -97,7 +97,7 @@ class CartScreen extends StatelessWidget {
                                     ],
                                   ),
                                   Text(
-                                    "250",
+                                    "${state.totalPriceOfItems}",
                                     style: GoogleFonts.cormorantGaramond(
                                       fontSize: 30,
                                       color: Color(0xFF7C3375),
