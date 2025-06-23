@@ -24,6 +24,18 @@ class FavoritesScreen extends StatelessWidget {
         builder: (context, state) {
           if (state is LoadingState) {
             return Center(child: CircularProgressIndicator());
+          } else if (state is EmptyListState) {
+            return Center(
+              child: Text(
+                textAlign: TextAlign.center,
+                "You don’t have any \n favourites",
+                style: GoogleFonts.cormorantGaramond(
+                  color: Color(0xFF31405D),
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            );
           } else if (state is LoadedState) {
             return Padding(
               padding: EdgeInsets.only(
@@ -39,11 +51,10 @@ class FavoritesScreen extends StatelessWidget {
                     children: [
                       GestureDetector(
                         child: CustomIconContainer(Icons.line_weight_outlined),
-                        onTap: (){
+                        onTap: () {
                           Scaffold.of(context).openDrawer();
-                        }
+                        },
                       ),
-
 
                       Padding(
                         padding: EdgeInsets.only(left: 53),
@@ -66,6 +77,9 @@ class FavoritesScreen extends StatelessWidget {
                       child: ListView.builder(
                         itemCount: state.clothes.length,
                         itemBuilder: (context, index) {
+                          final clothesListt = state.clothes;
+                          List<ClothesModel> reversedClothes =
+                              state.clothes.reversed.toList();
                           return InkWell(
                             onTap: () {
                               Navigator.push(
@@ -73,7 +87,8 @@ class FavoritesScreen extends StatelessWidget {
                                 MaterialPageRoute(
                                   builder:
                                       (context) => ProductScreen(
-                                        clothesId: state.clothes[index].clothesId,
+                                        clothesId:
+                                            reversedClothes[index].clothesId,
                                       ),
                                 ),
                               );
@@ -116,13 +131,11 @@ class FavoritesScreen extends StatelessWidget {
                                             Row(
                                               children: [
                                                 Text(
-                                                  state
-                                                      .clothes[index]
+                                                  reversedClothes[index]
                                                       .clothesName
                                                       .substring(
                                                         0,
-                                                        (state
-                                                                    .clothes[index]
+                                                        (reversedClothes[index]
                                                                     .clothesName
                                                                     .length /
                                                                 2)
@@ -182,7 +195,7 @@ class FavoritesScreen extends StatelessWidget {
                                             Row(
                                               children: [
                                                 Text(
-                                                  state.clothes[index].price
+                                                  reversedClothes[index].price
                                                       .toString(),
                                                   style:
                                                       GoogleFonts.cormorantGaramond(
@@ -217,7 +230,7 @@ class FavoritesScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(20),
                                     child: Image(
                                       image: NetworkImage(
-                                        state.clothes[index].clothesImage,
+                                        reversedClothes[index].clothesImage,
                                       ),
                                       width: 138,
                                       height: 182,

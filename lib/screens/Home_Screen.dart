@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_flutter/cubits/home/Home_Cubit.dart';
 import 'package:ecommerce_flutter/cubits/home/Home_State.dart';
 import 'package:ecommerce_flutter/custom_widgets/Custom_ChipGroup.dart';
@@ -94,39 +95,37 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(height: 27),
 
                     //First ListView
-                    SizedBox(
-                      height: 166,
-                      child: ListView.builder(
-                        itemCount: state.clothesModel.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder:
-                                      (context) => ProductScreen(
-                                        clothesId: state.clothesModel[index].clothesId,
-                                      ),
-                                ),
-                              );
-                            },
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                left: index != 0 ? 18 : 0,
-                              ),
-                              child: ProductItem(
-                                imageName:
-                                    state.clothesModel[index].clothesImage,
-                                widthOfContainer: 137,
-                                heightOfContainer: 166,
-                              ),
-                            ),
-                          );
-                        },
+                    CarouselSlider.builder(
+                      itemCount: state.clothesModel.length,
+                      options: CarouselOptions(
+                        height: 166,
+                        viewportFraction: 0.4, // controls item width relative to screen width
+                        enableInfiniteScroll: false,
+                        enlargeCenterPage: true
+                        // You can add autoPlay: true, autoPlayInterval, etc. if you want
                       ),
+                      itemBuilder: (context, index, realIdx) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProductScreen(
+                                  clothesId: state.clothesModel[index].clothesId,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Padding(padding: EdgeInsets.only(left: index == 0 ? 0 : 18),child: ProductItem(
+                            imageName: state.clothesModel[index].clothesImage,
+                            widthOfContainer: 137,
+                            heightOfContainer: 166,
+                          ) ,)
+
+                        );
+                      },
                     ),
+
                     SizedBox(height: 60),
                     CustomChipGroup(["New 21", "Trending", "Recent"],"HomeScreen"),
                     SizedBox(height: 54),

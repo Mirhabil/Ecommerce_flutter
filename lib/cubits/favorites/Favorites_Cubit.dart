@@ -46,7 +46,12 @@ class FavoritesCubit extends Cubit<FavoritesState> {
 
       clothes = clothesList.where((item) => item.isFavorite == true).toList();
 
-      emit(LoadedState(clothes));
+      if(clothes.isEmpty){
+        emit(EmptyListState());
+      }else{
+        emit(LoadedState(clothes));
+      }
+
       print("Doneeeeeeee");
     } catch (e) {
       print(e);

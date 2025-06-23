@@ -118,7 +118,7 @@ class ProductScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  "20",
+                                  "${state.clothes.price.toString()}\$",
                                   style: GoogleFonts.cormorantGaramond(
                                     fontSize: 27,
                                     color: Color(0xFF834E7F),
@@ -205,12 +205,19 @@ class ProductScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                Image(
-                                  image: AssetImage("assets/Group 167.png"),
-                                  width: 42,
-                                  height: 36,
-                                  color: Colors.purple,
-                                ),
+                                GestureDetector(
+                                  onTap: (){
+                                    productsCubit.updateChart( state.clothes.clothesId,
+                                      state.clothes.isAddedToChart);
+                                  },
+                                  child: Image(
+                                    image: state.clothes.isAddedToChart ? AssetImage("assets/Group 187.png"):AssetImage("assets/Group 167.png"),
+                                    width: 42,
+                                    height: 36,
+                                    color: Colors.purple,
+                                  ),
+                                )
+
                               ],
                             ),
                           ],

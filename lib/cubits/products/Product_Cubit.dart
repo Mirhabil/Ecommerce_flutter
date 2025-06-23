@@ -29,6 +29,23 @@ class ProductsCubit extends Cubit<ProductsState> {
   }
 
 
+  Future<void> updateChart(int id, bool currentChart) async {
+    try {
+      final updatedChart = !currentChart;
+
+      final response = await dio.put(
+        "http://localhost:8080/ecommerceApi/updateClothesChart",
+        data: {'clothesId': id, 'favorite': updatedChart},
+      );
+
+      // Re-fetch the updated item
+      await fetchClothesById(id);
+    } catch (e) {
+      print("Error updating favorite: $e");
+    }
+  }
+
+
   // ProductsCubit({required bool initialFavorite})
   //     : favorite = initialFavorite,
   //       super(LoadedState(initialFavorite));

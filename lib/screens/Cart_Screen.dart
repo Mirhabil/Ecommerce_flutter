@@ -17,9 +17,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-      CartsCubit()
-        ..fetchListForChart(),
+      create: (context) => CartsCubit()..fetchListForChart(),
       child: BlocBuilder<CartsCubit, CartsState>(
         builder: (context, state) {
           if (state is LoadingState) {
@@ -36,7 +34,8 @@ class CartScreen extends StatelessWidget {
                         child: CustomIconContainer(Icons.line_weight_outlined),
                         onTap: () {
                           Scaffold.of(context).openDrawer();
-                        },),
+                        },
+                      ),
 
                       SizedBox(width: 94),
                       Text(
@@ -60,22 +59,38 @@ class CartScreen extends StatelessWidget {
                           final currentItem = state.listOfCarts[index];
                           if (currentItem is CartItemClass) {
                             final item = state.listOfCarts[index];
-                            return GestureDetector(child: CartItem(
-                                currentItem.imagePath,
-                                index != 0 ? 30 : 0,
-                                currentItem.count,
-                                index
-                            ), onTap: () {
-                              Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => ProductScreen(
-                                    clothesId: currentItem.clothesId),));
-                            },);
+                            return Dismissible(
+                              key: UniqueKey(),
+                              direction: DismissDirection.endToStart,
+                              onDismissed: (DismissDirection direction) {
+                                state.listOfCarts.remove(index);
+                              },
+                              child: GestureDetector(
+                                child: CartItem(
+                                  currentItem.imagePath,
+                                  index != 0 ? 30 : 0,
+                                  currentItem.count,
+                                  index,
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder:
+                                          (context) => ProductScreen(
+                                            clothesId: currentItem.clothesId,
+                                          ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
                           } else if (currentItem is ButtonClass) {
                             return Padding(
                               padding: EdgeInsets.only(top: 66, bottom: 88),
                               child: Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   CustomButton.black(
                                     "Make Purchase",
@@ -132,8 +147,14 @@ class CartItemClass extends ViewType {
   String imagePath;
   int clothesId;
 
-  CartItemClass(this.color, this.price, this.totalCount, this.count,
-      this.imagePath, this.clothesId);
+  CartItemClass(
+    this.color,
+    this.price,
+    this.totalCount,
+    this.count,
+    this.imagePath,
+    this.clothesId,
+  );
 }
 
 class ButtonClass extends ViewType {

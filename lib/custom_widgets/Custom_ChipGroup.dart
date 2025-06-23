@@ -60,7 +60,7 @@ class CustomChipGroup extends StatelessWidget {
               margin: EdgeInsets.only(left: index==0 ? 0 :27),
               padding: EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
-                color: isSelected ? Colors.purple : Colors.white,
+                color: isSelected ? Color(0xFF834E7F) : Colors.white,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Center(

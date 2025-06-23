@@ -7,3 +7,5 @@ class LoadedState extends FavoritesState{
   List<ClothesModel> clothes;
   LoadedState(this.clothes);
 }
+
+class EmptyListState extends FavoritesState{}
