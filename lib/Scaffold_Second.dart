@@ -5,6 +5,7 @@ import 'package:ecommerce_flutter/screens/Category_Screen.dart';
 import 'package:ecommerce_flutter/screens/Favorites_Screen.dart';
 import 'package:ecommerce_flutter/screens/Home_Screen.dart';
 import 'package:ecommerce_flutter/screens/Introduction_Screen.dart';
+import 'package:ecommerce_flutter/screens/Menu_Screen.dart';
 import 'package:ecommerce_flutter/screens/Product_Screen.dart';
 import 'package:ecommerce_flutter/screens/Promocode_Screen.dart';
 import 'package:ecommerce_flutter/screens/Settings_Screen.dart';
@@ -26,6 +27,7 @@ class _ScaffoldSecondState extends State<ScaffoldSecond> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(child: MenuScreen(),),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (value) {
           setState(() {
@@ -36,7 +38,7 @@ class _ScaffoldSecondState extends State<ScaffoldSecond> {
 
         items: [
           BottomNavigationBarItem(
-            icon: Image.asset("assets/Vector.png", color: Colors.grey),
+            icon: Image.asset("assets/Vector-4.png", color: Colors.grey),
             label: "",
           ),
           BottomNavigationBarItem(

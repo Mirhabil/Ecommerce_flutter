@@ -37,7 +37,13 @@ class FavoritesScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      CustomIconContainer(Icons.line_weight_outlined),
+                      GestureDetector(
+                        child: CustomIconContainer(Icons.line_weight_outlined),
+                        onTap: (){
+                          Scaffold.of(context).openDrawer();
+                        }
+                      ),
+
 
                       Padding(
                         padding: EdgeInsets.only(left: 53),

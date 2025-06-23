@@ -17,8 +17,10 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CartsCubit()..fetchListForChart(),
-      child: BlocBuilder<CartsCubit,CartsState>(
+      create: (context) =>
+      CartsCubit()
+        ..fetchListForChart(),
+      child: BlocBuilder<CartsCubit, CartsState>(
         builder: (context, state) {
           if (state is LoadingState) {
             return Center(child: CircularProgressIndicator());
@@ -30,7 +32,12 @@ class CartScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      CustomIconContainer(Icons.line_weight_outlined),
+                      InkWell(
+                        child: CustomIconContainer(Icons.line_weight_outlined),
+                        onTap: () {
+                          Scaffold.of(context).openDrawer();
+                        },),
+
                       SizedBox(width: 94),
                       Text(
                         "Cart",
@@ -58,14 +65,17 @@ class CartScreen extends StatelessWidget {
                                 index != 0 ? 30 : 0,
                                 currentItem.count,
                                 index
-                            ),onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen(clothesId: currentItem.clothesId),));},);
-
+                            ), onTap: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context) => ProductScreen(
+                                    clothesId: currentItem.clothesId),));
+                            },);
                           } else if (currentItem is ButtonClass) {
                             return Padding(
                               padding: EdgeInsets.only(top: 66, bottom: 88),
                               child: Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   CustomButton.black(
                                     "Make Purchase",
@@ -122,7 +132,8 @@ class CartItemClass extends ViewType {
   String imagePath;
   int clothesId;
 
-  CartItemClass(this.color, this.price, this.totalCount, this.count,this.imagePath,this.clothesId);
+  CartItemClass(this.color, this.price, this.totalCount, this.count,
+      this.imagePath, this.clothesId);
 }
 
 class ButtonClass extends ViewType {

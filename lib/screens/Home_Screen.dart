@@ -5,6 +5,7 @@ import 'package:ecommerce_flutter/custom_widgets/Custom_Icon_Container.dart';
 import 'package:ecommerce_flutter/custom_widgets/Custom_Search_Widget.dart';
 import 'package:ecommerce_flutter/custom_widgets/Product_Item.dart';
 import 'package:ecommerce_flutter/screens/Branches_Screen.dart';
+import 'package:ecommerce_flutter/screens/Menu_Screen.dart';
 import 'package:ecommerce_flutter/screens/Product_Screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,9 +35,13 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Padding(
                           padding: EdgeInsets.only(top: 74),
-                          child: CustomIconContainer(
+                          child: InkWell(child: CustomIconContainer(
                             Icons.line_weight_outlined,
-                          ),
+                          ),onTap: (){
+                            Scaffold.of(context).openDrawer();
+                            //Navigator.push(context, MaterialPageRoute(builder: (context) => MenuScreen(),));
+                          },)
+
                         ),
                         Padding(
                           padding: EdgeInsets.only(top: 74, right: 30),
