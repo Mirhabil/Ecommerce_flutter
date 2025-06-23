@@ -109,6 +109,8 @@ class ProductsCubit extends Cubit<ProductsState> {
         item['totalStock'] ?? 0,
         item['clothesImage'] ?? '',
         item['favorite'] ?? false,
+        item['itemCount'] ?? 0,
+        item['addedToChart'] ?? null,
       );
 
       emit(LoadedState(result));

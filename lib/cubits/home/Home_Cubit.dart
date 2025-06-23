@@ -6,70 +6,79 @@ import 'package:ecommerce_flutter/cubits/home/Home_State.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-List<ClothesModel> clothes=[];
+List<ClothesModel> clothes = [];
+
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(LoadingState());
 
-
   List<ClothesModel> clothesList = [];
-  List<ClothesModel> filteredClothesList=[];
-  int activeIndex=0;
+  List<ClothesModel> filteredClothesList = [];
+  int activeIndex = 0;
   Dio dio = Dio();
 
   Future<void> fetchClothes() async {
-    try{
-      final response=await dio.get("http://localhost:8080/ecommerceApi/allClothes");
+    try {
+      final response = await dio.get(
+        "http://localhost:8080/ecommerceApi/allClothes",
+      );
 
       print(response);
 
-      final data=response.data as List;
+      final data = response.data as List;
 
-      clothesList=data.map((item)=> ClothesModel(
-        item['clothesId'] ?? 0,
-        item['clothesName'] ?? '',
-        item['clothesCompany'] ?? '',
-        item['new'] ?? false,
-        item['trending'] ?? false,
-        item['recent'] ?? false,
-        item['quantity'] ?? 0,
-        (item['price'] as num).toDouble(),
-        item['stock'] ?? 0,
-        item['totalStock'] ?? 0,
-        item['clothesImage'] ?? '',
-        item['favorite']
-
-      )).toList();
+      clothesList =
+          data
+              .map(
+                (item) => ClothesModel(
+                  item['clothesId'] ?? 0,
+                  item['clothesName'] ?? '',
+                  item['clothesCompany'] ?? '',
+                  item['new'] ?? false,
+                  item['trending'] ?? false,
+                  item['recent'] ?? false,
+                  item['quantity'] ?? 0,
+                  (item['price'] as num).toDouble(),
+                  item['stock'] ?? 0,
+                  item['totalStock'] ?? 0,
+                  item['clothesImage'] ?? '',
+                  item['favorite'],
+                  item['itemCount'] ?? 0,
+                  item['addedToChart'] ?? null,
+                ),
+              )
+              .toList();
 
       print("Main List: $clothesList");
 
-      clothes=clothesList.where((item)=> item.isFavorite==true).toList();
+      clothes = clothesList.where((item) => item.isFavorite == true).toList();
 
       filteredClothesList = clothesList.where((item) => item.isNew).toList();
       print("Filtered clothes: $filteredClothesList");
 
-      emit(LoadedState(clothesList,filteredClothesList));
-
-    }catch(e){
+      emit(LoadedState(clothesList, filteredClothesList));
+    } catch (e) {
       print(e);
     }
-
   }
 
   void filterForNew() {
-    filteredClothesList=clothesList.where((item)=> item.isNew==true).toList();
-    activeIndex=0;
+    filteredClothesList =
+        clothesList.where((item) => item.isNew == true).toList();
+    activeIndex = 0;
     emit(LoadedState(clothesList, filteredClothesList));
   }
 
   void filterForTrending() {
-    filteredClothesList=clothesList.where((item)=> item.isTrending==true).toList();
-    activeIndex=1;
+    filteredClothesList =
+        clothesList.where((item) => item.isTrending == true).toList();
+    activeIndex = 1;
     emit(LoadedState(clothesList, filteredClothesList));
   }
 
   void filterForRecent() {
-    activeIndex=2;
-    filteredClothesList=clothesList.where((item)=> item.isRecent==true).toList();
+    activeIndex = 2;
+    filteredClothesList =
+        clothesList.where((item) => item.isRecent == true).toList();
     emit(LoadedState(clothesList, filteredClothesList));
   }
 }
@@ -87,6 +96,8 @@ class ClothesModel {
   int totalStock;
   String clothesImage;
   bool isFavorite;
+  int count;
+  bool isAddedToChart;
 
   ClothesModel(
     this.clothesId,
@@ -100,6 +111,27 @@ class ClothesModel {
     this.stock,
     this.totalStock,
     this.clothesImage,
-    this.isFavorite
+    this.isFavorite,
+    this.count,
+    this.isAddedToChart,
   );
+
+  factory ClothesModel.fromJson(Map<String, dynamic> json) {
+    return ClothesModel(
+      json['clothesId'] ?? 0,
+      json['clothesName'] ?? '',
+      json['clothesCompany'] ?? '',
+      json['new'] ?? false,
+      json['trending'] ?? false,
+      json['recent'] ?? false,
+      json['quantity'] ?? 0,
+      (json['price'] as num).toDouble(),
+      json['stock'] ?? 0,
+      json['totalStock'] ?? 0,
+      json['clothesImage'] ?? '',
+      json['favorite'],
+      json['itemCount'] ?? 0,
+      json['addedToChart'] ?? null,
+    );
+  }
 }

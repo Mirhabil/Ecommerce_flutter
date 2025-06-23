@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CategoryItem extends StatelessWidget {
   String imageName;
@@ -30,17 +31,32 @@ class CategoryItem extends StatelessWidget {
                 ),
               ],
             ),
-            child: Image.network(
-              imageName,
-              width: 138,
-              height: 182,
-              fit: BoxFit.fill,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.network(
+                imageName,
+                width: 200,
+                height: 250,
+                fit: BoxFit.fill,
+              ),
             ),
           ),
           SizedBox(height: 19),
-          Text(brandName),
+          Text(
+            brandName,
+            style: GoogleFonts.cormorantGaramond(
+              color: Color(0xFF31405D),
+              fontSize: 26,
+            ),
+          ),
           SizedBox(height: 17),
-          Text(price.toString()),
+          Text(
+            price.toString(),
+            style: GoogleFonts.cormorantGaramond(
+              color: Color(0xFF834E7F),
+              fontSize: 30,
+            ),
+          ),
         ],
       ),
     );

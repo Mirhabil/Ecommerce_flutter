@@ -35,7 +35,9 @@ class CategoryCubit extends Cubit<CategoryState> {
             clothesItem['stock'] ?? 0,
             clothesItem['totalStock'] ?? 0,
             clothesItem['clothesImage'] ?? '',
-            clothesItem['favorite']
+            clothesItem['favorite'],
+            clothesItem['itemCount'] ?? 0,
+            clothesItem['addedToChart'] ?? null,
           );
         }).toList();
 
@@ -45,6 +47,8 @@ class CategoryCubit extends Cubit<CategoryState> {
           clothes,
         );
       }).toList();
+
+      print("Category Screen Loaded: $categoryList");
 
       emit(LoadedState(categoryList,activeIndex));
     } catch (e) {
