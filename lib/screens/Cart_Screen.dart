@@ -9,6 +9,7 @@ import 'package:ecommerce_flutter/screens/Product_Screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CartScreen extends StatelessWidget {
@@ -98,7 +99,9 @@ class CartScreen extends StatelessWidget {
                                         context: context,
                                         builder:
                                             (context) => AlertDialog(
-                                              title: Text("${state.totalPriceOfItems}\$ for all items"),
+                                              title: Text(
+                                                "${state.totalPriceOfItems}\$ for all items",
+                                              ),
                                               content: Text(
                                                 "Do you want to purchase?",
                                               ),
@@ -112,12 +115,25 @@ class CartScreen extends StatelessWidget {
                                                   child: const Text('Cancel'),
                                                 ),
                                                 TextButton(
-                                                  onPressed:
-                                                      () => Navigator.pop(
-                                                        context,
-                                                        'OK',
+                                                  onPressed: () {
+                                                    ScaffoldMessenger.of(
+                                                      context,
+                                                    ).showSnackBar(
+                                                      SnackBar(
+                                                        content: Text(
+                                                          "Successful Purchase",
+                                                        ),
+                                                        backgroundColor:
+                                                            Colors.lightGreen,
                                                       ),
-                                                  child: const Text('OK'),
+                                                    );
+
+                                                    Navigator.pop(
+                                                      context,
+                                                      'OK',
+                                                    );
+                                                  },
+                                                  child: const Text('Purchase'),
                                                 ),
                                               ],
                                             ),

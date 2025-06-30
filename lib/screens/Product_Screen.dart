@@ -186,38 +186,91 @@ class ProductScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                CustomButton.black(
-                                  "Buy now",
-                                  boxShadow: [
-                                    BoxShadow(
-                                      offset: Offset(9, 9),
-                                      blurRadius: 16,
-                                      color: Color(
-                                        0xFF6295E2,
-                                      ).withValues(alpha: 0.11),
-                                    ),
-                                    BoxShadow(
-                                      offset: Offset(-9, -9),
-                                      blurRadius: 16,
-                                      color: Color(
-                                        0xFFFFFFFF,
-                                      ).withValues(alpha: 0.25),
-                                    ),
-                                  ],
+                                InkWell(
+                                  onTap: () {
+                                    showDialog(
+                                      context: context,
+                                      builder:
+                                          (context) => AlertDialog(
+                                        title: Text(
+                                          "${state.clothes.price}\$ for all items",
+                                        ),
+                                        content: Text(
+                                          "Do you want to purchase?",
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            onPressed:
+                                                () => Navigator.pop(
+                                              context,
+                                              'Cancel',
+                                            ),
+                                            child: const Text('Cancel'),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              ScaffoldMessenger.of(
+                                                context,
+                                              ).showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    "Successful Purchase",
+                                                  ),
+                                                  backgroundColor:
+                                                  Colors.lightGreen,
+                                                ),
+                                              );
+
+                                              Navigator.pop(
+                                                context,
+                                                'OK',
+                                              );
+                                            },
+                                            child: const Text('Purchase'),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  child: CustomButton.black(
+                                    "Buy Now",
+                                    boxShadow: [
+                                      BoxShadow(
+                                        offset: Offset(9, 9),
+                                        blurRadius: 16,
+                                        color: Color(
+                                          0xFF6295E2,
+                                        ).withValues(alpha: 0.11),
+                                      ),
+                                      BoxShadow(
+                                        offset: Offset(-9, -9),
+                                        blurRadius: 16,
+                                        color: Color(
+                                          0xFFFFFFFF,
+                                        ).withValues(alpha: 0.25),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 GestureDetector(
-                                  onTap: (){
-                                    productsCubit.updateChart( state.clothes.clothesId,
-                                      state.clothes.isAddedToChart);
+                                  onTap: () {
+                                    productsCubit.updateChart(
+                                      state.clothes.clothesId,
+                                      state.clothes.isAddedToChart,
+                                    );
                                   },
                                   child: Image(
-                                    image: state.clothes.isAddedToChart ? AssetImage("assets/Group 187.png"):AssetImage("assets/Group 167.png"),
+                                    image:
+                                        state.clothes.isAddedToChart
+                                            ? AssetImage("assets/Group 187.png")
+                                            : AssetImage(
+                                              "assets/Group 167.png",
+                                            ),
                                     width: 42,
                                     height: 36,
                                     color: Colors.purple,
                                   ),
-                                )
-
+                                ),
                               ],
                             ),
                           ],

@@ -36,13 +36,15 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Padding(
                           padding: EdgeInsets.only(top: 74),
-                          child: InkWell(child: CustomIconContainer(
-                            Icons.line_weight_outlined,
-                          ),onTap: (){
-                            Scaffold.of(context).openDrawer();
-                            //Navigator.push(context, MaterialPageRoute(builder: (context) => MenuScreen(),));
-                          },)
-
+                          child: InkWell(
+                            child: CustomIconContainer(
+                              Icons.line_weight_outlined,
+                            ),
+                            onTap: () {
+                              Scaffold.of(context).openDrawer();
+                              //Navigator.push(context, MaterialPageRoute(builder: (context) => MenuScreen(),));
+                            },
+                          ),
                         ),
                         Padding(
                           padding: EdgeInsets.only(top: 74, right: 30),
@@ -87,7 +89,15 @@ class HomeScreen extends StatelessWidget {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(18),
                           ),
-                          child: Center(child: Text("view all")),
+                          child: Center(
+                            child: Text(
+                              "view all",
+                              style: GoogleFonts.cormorantGaramond(
+                                color: Color(0xFF8D4888),
+                                fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -99,9 +109,10 @@ class HomeScreen extends StatelessWidget {
                       itemCount: state.clothesModel.length,
                       options: CarouselOptions(
                         height: 166,
-                        viewportFraction: 0.4, // controls item width relative to screen width
+                        viewportFraction: 0.4,
+                        // controls item width relative to screen width
                         enableInfiniteScroll: false,
-                        enlargeCenterPage: true
+                        enlargeCenterPage: true,
                         // You can add autoPlay: true, autoPlayInterval, etc. if you want
                       ),
                       itemBuilder: (context, index, realIdx) {
@@ -110,24 +121,32 @@ class HomeScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ProductScreen(
-                                  clothesId: state.clothesModel[index].clothesId,
-                                ),
+                                builder:
+                                    (context) => ProductScreen(
+                                      clothesId:
+                                          state.clothesModel[index].clothesId,
+                                    ),
                               ),
                             );
                           },
-                          child: Padding(padding: EdgeInsets.only(left: index == 0 ? 0 : 18),child: ProductItem(
-                            imageName: state.clothesModel[index].clothesImage,
-                            widthOfContainer: 137,
-                            heightOfContainer: 166,
-                          ) ,)
-
+                          child: Padding(
+                            padding: EdgeInsets.only(left: index == 0 ? 0 : 18),
+                            child: ProductItem(
+                              imageName: state.clothesModel[index].clothesImage,
+                              widthOfContainer: 137,
+                              heightOfContainer: 166,
+                            ),
+                          ),
                         );
                       },
                     ),
 
                     SizedBox(height: 60),
-                    CustomChipGroup(["New 21", "Trending", "Recent"],"HomeScreen"),
+                    CustomChipGroup([
+                      "New 21",
+                      "Trending",
+                      "Recent",
+                    ], "HomeScreen"),
                     SizedBox(height: 54),
 
                     MediaQuery.removePadding(
@@ -152,7 +171,10 @@ class HomeScreen extends StatelessWidget {
                                 MaterialPageRoute(
                                   builder:
                                       (context) => ProductScreen(
-                                        clothesId: state.filteredClothesModel[index].clothesId,
+                                        clothesId:
+                                            state
+                                                .filteredClothesModel[index]
+                                                .clothesId,
                                       ),
                                 ),
                               );
