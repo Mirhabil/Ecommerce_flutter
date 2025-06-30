@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:ecommerce_flutter/cubits/favorites/Favorites_Cubit.dart';
 import 'package:ecommerce_flutter/cubits/favorites/Favorites_State.dart';
 import 'package:ecommerce_flutter/custom_widgets/Custom_Icon_Container.dart';
-import 'package:ecommerce_flutter/screens/Product_Screen.dart';
+import 'package:ecommerce_flutter/screens/product_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,15 +11,21 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../cubits/home/Home_Cubit.dart';
 
-class FavoritesScreen extends StatelessWidget {
+class FavoritesScreen extends StatefulWidget {
   List<ClothesModel> clothes;
 
   FavoritesScreen(this.clothes);
 
   @override
+  State<FavoritesScreen> createState() => _FavoritesScreenState();
+}
+
+class _FavoritesScreenState extends State<FavoritesScreen> {
+  FavoritesCubit cubit = FavoritesCubit();
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => FavoritesCubit()..fetchClothes(),
+      create: (context) => cubit..fetchClothes(),
       child: BlocBuilder<FavoritesCubit, FavoritesState>(
         builder: (context, state) {
           if (state is LoadingState) {
@@ -37,6 +43,7 @@ class FavoritesScreen extends StatelessWidget {
               ),
             );
           } else if (state is LoadedState) {
+            debugPrint('state lenght: ${state.clothes.length}');
             return Padding(
               padding: EdgeInsets.only(
                 left: 30,
@@ -89,6 +96,7 @@ class FavoritesScreen extends StatelessWidget {
                                       (context) => ProductScreen(
                                         clothesId:
                                             reversedClothes[index].clothesId,
+                                        cubit: cubit,
                                       ),
                                 ),
                               );
@@ -195,8 +203,7 @@ class FavoritesScreen extends StatelessWidget {
                                             Row(
                                               children: [
                                                 Text(
-                                                  reversedClothes[index].price
-                                                      .toString(),
+                                                  "${reversedClothes[index].price}\$",
                                                   style:
                                                       GoogleFonts.cormorantGaramond(
                                                         fontSize: 16,

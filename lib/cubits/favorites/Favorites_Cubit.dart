@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:ecommerce_flutter/cubits/favorites/Favorites_State.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../home/Home_Cubit.dart';
@@ -7,20 +8,20 @@ import '../home/Home_Cubit.dart';
 class FavoritesCubit extends Cubit<FavoritesState> {
   FavoritesCubit() : super(LoadingState());
 
-  List<ClothesModel> clothesList = [];
   Dio dio = Dio();
 
+  //--  JIT & AOT Compiling
+
   Future<void> fetchClothes() async {
+    debugPrint('is here');
     try {
       final response = await dio.get(
         "http://localhost:8080/ecommerceApi/allClothes",
       );
 
-      print(response);
-
       final data = response.data as List;
 
-      clothesList =
+      List<ClothesModel> clothesList =
           data
               .map(
                 (item) => ClothesModel(
@@ -37,22 +38,19 @@ class FavoritesCubit extends Cubit<FavoritesState> {
                   item['clothesImage'] ?? '',
                   item['favorite'],
                   item['itemCount'] ?? 0,
-                  item['addedToChart'] ?? null,
+                  item['addedToChart'],
                 ),
               )
               .toList();
 
-      print("Main List: $clothesList");
+      final favList = clothesList.where((e) => e.isFavorite == true).toList();
 
-      clothes = clothesList.where((item) => item.isFavorite == true).toList();
-
-      if(clothes.isEmpty){
+      if (favList.isEmpty) {
         emit(EmptyListState());
-      }else{
-        emit(LoadedState(clothes));
+      } else {
+        print("Doneeeeeeee ${favList.length}");
+        emit(LoadedState(favList));
       }
-
-      print("Doneeeeeeee");
     } catch (e) {
       print(e);
     }

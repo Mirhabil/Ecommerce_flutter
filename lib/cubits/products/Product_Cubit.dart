@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:ecommerce_flutter/cubits/favorites/Favorites_Cubit.dart';
 import 'package:ecommerce_flutter/cubits/products/Products_State.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -6,13 +7,17 @@ import '../home/Home_Cubit.dart';
 
 class ProductsCubit extends Cubit<ProductsState> {
   //bool favorite;
-  ProductsCubit():super(LoadingState());
+  ProductsCubit() : super(LoadingState());
   List<ClothesModel> clothesList = [];
   List<ClothesModel> filteredClothesList = [];
   int activeIndex = 0;
   Dio dio = Dio();
 
-  Future<void> updateFavorite(int id, bool currentFavorite) async {
+  Future<void> updateFavorite(
+    int id,
+    bool currentFavorite, {
+    FavoritesCubit? cubit,
+  }) async {
     try {
       final updatedFavorite = !currentFavorite;
 
@@ -21,13 +26,14 @@ class ProductsCubit extends Cubit<ProductsState> {
         data: {'clothesId': id, 'favorite': updatedFavorite},
       );
 
+      await cubit?.fetchClothes();
+
       // Re-fetch the updated item
       await fetchClothesById(id);
     } catch (e) {
       print("Error updating favorite: $e");
     }
   }
-
 
   Future<void> updateChart(int id, bool currentChart) async {
     try {
@@ -44,7 +50,6 @@ class ProductsCubit extends Cubit<ProductsState> {
       print("Error updating favorite: $e");
     }
   }
-
 
   // ProductsCubit({required bool initialFavorite})
   //     : favorite = initialFavorite,
@@ -107,9 +112,10 @@ class ProductsCubit extends Cubit<ProductsState> {
   // }
 
   Future<void> fetchClothesById(int id) async {
-
     try {
-      final response = await dio.get("http://localhost:8080/ecommerceApi/getClothesById/$id");
+      final response = await dio.get(
+        "http://localhost:8080/ecommerceApi/getClothesById/$id",
+      );
       final item = response.data;
       print("Itemsssssss: $item");
 

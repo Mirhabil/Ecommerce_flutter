@@ -7,7 +7,7 @@ import 'package:ecommerce_flutter/custom_widgets/Custom_Search_Widget.dart';
 import 'package:ecommerce_flutter/custom_widgets/Product_Item.dart';
 import 'package:ecommerce_flutter/screens/Branches_Screen.dart';
 import 'package:ecommerce_flutter/screens/Menu_Screen.dart';
-import 'package:ecommerce_flutter/screens/Product_Screen.dart';
+import 'package:ecommerce_flutter/screens/product_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -94,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                               "view all",
                               style: GoogleFonts.cormorantGaramond(
                                 color: Color(0xFF8D4888),
-                                fontWeight: FontWeight.bold
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),

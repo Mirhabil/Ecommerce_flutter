@@ -5,7 +5,7 @@ import 'package:ecommerce_flutter/cubits/carts/Carts_State.dart';
 import 'package:ecommerce_flutter/custom_widgets/Cart_Item.dart';
 import 'package:ecommerce_flutter/custom_widgets/Custom_Button.dart';
 import 'package:ecommerce_flutter/custom_widgets/Custom_Icon_Container.dart';
-import 'package:ecommerce_flutter/screens/Product_Screen.dart';
+import 'package:ecommerce_flutter/screens/product_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

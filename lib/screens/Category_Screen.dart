@@ -30,23 +30,33 @@ class CategoryScreen extends StatelessWidget {
                 children: [
                   CustomSearchWidget(),
                   SizedBox(height: 44),
-                  CustomChipGroup(["Boys", "Girls", "Kids"],"CategoryScreen"),
+                  CustomChipGroup(["Boys", "Girls", "Kids"], "CategoryScreen"),
                   SizedBox(height: 32),
                   Expanded(
                     child: GridView.builder(
-                      padding: EdgeInsets.only(bottom: 20,left: 0),
+                      padding: EdgeInsets.only(bottom: 20, left: 0),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 25,
                         mainAxisSpacing: 49,
                         // childAspectRatio: 0.76,
                       ),
-                      itemCount: state.categoryList[state.activeIndex].clothes.length,
+                      itemCount:
+                          state.categoryList[state.activeIndex].clothes.length,
                       itemBuilder: (context, index) {
                         return CategoryItem(
-                          state.categoryList[state.activeIndex].clothes[index].clothesImage,
-                          state.categoryList[state.activeIndex].clothes[index].clothesName,
-                          state.categoryList[state.activeIndex].clothes[index].price,
+                          state
+                              .categoryList[state.activeIndex]
+                              .clothes[index]
+                              .clothesImage,
+                          state
+                              .categoryList[state.activeIndex]
+                              .clothes[index]
+                              .clothesName,
+                          state
+                              .categoryList[state.activeIndex]
+                              .clothes[index]
+                              .price,
                         );
                       },
                     ),

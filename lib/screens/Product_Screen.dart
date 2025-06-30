@@ -1,20 +1,26 @@
-import 'package:dio/dio.dart';
+import 'package:ecommerce_flutter/cubits/favorites/Favorites_Cubit.dart';
 import 'package:ecommerce_flutter/cubits/home/Home_Cubit.dart';
 import 'package:ecommerce_flutter/cubits/products/Product_Cubit.dart';
 import 'package:ecommerce_flutter/cubits/products/Products_State.dart';
 import 'package:ecommerce_flutter/custom_widgets/Custom_Button.dart';
-import 'package:ecommerce_flutter/custom_widgets/Custom_Container.dart';
 import 'package:ecommerce_flutter/custom_widgets/Custom_Icon_Container.dart';
 import 'package:ecommerce_flutter/custom_widgets/Size_Widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProductScreen extends StatelessWidget {
-  int clothesId;
+class ProductScreen extends StatefulWidget {
+  final int clothesId;
+  final FavoritesCubit? cubit;
 
-  ProductScreen({required this.clothesId});
+  const ProductScreen({super.key, required this.clothesId, this.cubit});
+
+  @override
+  State<ProductScreen> createState() => _ProductScreenState();
+}
+
+class _ProductScreenState extends State<ProductScreen> {
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +28,9 @@ class ProductScreen extends StatelessWidget {
       body: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => ProductsCubit()..fetchClothesById(clothesId),
+            create:
+                (context) =>
+                    ProductsCubit()..fetchClothesById(widget.clothesId),
           ),
           BlocProvider(create: (context) => HomeCubit()),
         ],
@@ -53,14 +61,14 @@ class ProductScreen extends StatelessWidget {
                             ),
                           ),
                           Positioned(
+                            top: 48,
+                            left: 34,
                             child: GestureDetector(
                               onTap: () {
                                 Navigator.pop(context);
                               },
                               child: CustomIconContainer(Icons.arrow_back),
                             ),
-                            top: 48,
-                            left: 34,
                           ),
                           Positioned(
                             right: 27,
@@ -70,9 +78,8 @@ class ProductScreen extends StatelessWidget {
                                 productsCubit.updateFavorite(
                                   state.clothes.clothesId,
                                   state.clothes.isFavorite,
+                                  cubit: widget.cubit,
                                 );
-                                // homeCubit.fetchClothes();
-                                //updateFavorite(clothes.clothesId, clothes.isFavorite);
                               },
                               child: Container(
                                 height: 30,
@@ -168,20 +175,48 @@ class ProductScreen extends StatelessWidget {
                                 itemCount: colorsList.length,
                                 scrollDirection: Axis.horizontal,
                                 itemBuilder: (context, index) {
-                                  return Container(
-                                    margin: EdgeInsets.only(
-                                      left: index != 0 ? 44 : 0,
-                                    ),
-                                    width: 24,
-                                    height: 24,
-                                    decoration: BoxDecoration(
-                                      color: colorsList[index],
-                                      shape: BoxShape.circle,
+                                  final isSelected = currentIndex == index;
+
+                                  return GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        currentIndex = index;
+                                      });
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(
+                                        left: index != 0 ? 20 : 0,
+                                        right: 12,
+                                      ),
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: colorsList[index],
+                                        border:
+                                            isSelected
+                                                ? Border.all(
+                                                  color: Colors.black,
+                                                  width: 2,
+                                                )
+                                                : null,
+                                      ),
+                                      child:
+                                          isSelected
+                                              ? Center(
+                                                child: Icon(
+                                                  Icons.check,
+                                                  size: 18,
+                                                  color: Colors.white,
+                                                ),
+                                              )
+                                              : null,
                                     ),
                                   );
                                 },
                               ),
                             ),
+
                             SizedBox(height: 43),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -192,44 +227,41 @@ class ProductScreen extends StatelessWidget {
                                       context: context,
                                       builder:
                                           (context) => AlertDialog(
-                                        title: Text(
-                                          "${state.clothes.price}\$ for all items",
-                                        ),
-                                        content: Text(
-                                          "Do you want to purchase?",
-                                        ),
-                                        actions: [
-                                          TextButton(
-                                            onPressed:
-                                                () => Navigator.pop(
-                                              context,
-                                              'Cancel',
+                                            title: Text(
+                                              "${state.clothes.price}\$ for all items",
                                             ),
-                                            child: const Text('Cancel'),
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              ScaffoldMessenger.of(
-                                                context,
-                                              ).showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                    "Successful Purchase",
-                                                  ),
-                                                  backgroundColor:
-                                                  Colors.lightGreen,
-                                                ),
-                                              );
+                                            content: Text(
+                                              "Do you want to purchase?",
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                onPressed:
+                                                    () => Navigator.pop(
+                                                      context,
+                                                      'Cancel',
+                                                    ),
+                                                child: const Text('Cancel'),
+                                              ),
+                                              TextButton(
+                                                onPressed: () {
+                                                  ScaffoldMessenger.of(
+                                                    context,
+                                                  ).showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                        "Successful Purchase",
+                                                      ),
+                                                      backgroundColor:
+                                                          Colors.lightGreen,
+                                                    ),
+                                                  );
 
-                                              Navigator.pop(
-                                                context,
-                                                'OK',
-                                              );
-                                            },
-                                            child: const Text('Purchase'),
+                                                  Navigator.pop(context, 'OK');
+                                                },
+                                                child: const Text('Purchase'),
+                                              ),
+                                            ],
                                           ),
-                                        ],
-                                      ),
                                     );
                                   },
                                   child: CustomButton.black(
