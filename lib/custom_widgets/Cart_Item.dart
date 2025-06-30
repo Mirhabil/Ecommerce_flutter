@@ -106,18 +106,18 @@ class CartItem extends StatelessWidget {
                     padding: EdgeInsets.only(left: 14),
                     child: Row(
                       children: [
-                        GestureDetector(
-                          child: Text("-", style: TextStyle(fontSize: 14)),
+                        InkWell(
+                          child: Text("-", style: TextStyle(fontSize: 15)),
                           onTap: (){
                             cartsCubit.decrementCount(index);
                           },
                         ),
 
                         SizedBox(width: 25),
-                        Text("${count}"),
+                        SizedBox(width: 28,child: Text("${count}",textAlign:TextAlign.center),),
                         SizedBox(width: 25),
-                        GestureDetector(
-                          child: Text("+", style: TextStyle(fontSize: 14)),
+                        InkWell(
+                          child: Text("+", style: TextStyle(fontSize: 15)),
                           onTap: (){
                             cartsCubit.incrementCount(index);
                           },

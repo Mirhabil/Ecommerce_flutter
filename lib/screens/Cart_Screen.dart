@@ -92,27 +92,60 @@ class CartScreen extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  CustomButton.black(
-                                    "Make Purchase",
-                                    boxShadow: [
-                                      BoxShadow(
-                                        offset: Offset(9, 9),
-                                        blurRadius: 16,
-                                        color: Color(
-                                          0xFF6295E2,
-                                        ).withValues(alpha: 0.11),
-                                      ),
-                                      BoxShadow(
-                                        offset: Offset(-9, -9),
-                                        blurRadius: 16,
-                                        color: Color(
-                                          0xFFFFFFFF,
-                                        ).withValues(alpha: 0.25),
-                                      ),
-                                    ],
+                                  InkWell(
+                                    onTap: () {
+                                      showDialog(
+                                        context: context,
+                                        builder:
+                                            (context) => AlertDialog(
+                                              title: Text("${state.totalPriceOfItems}\$ for all items"),
+                                              content: Text(
+                                                "Do you want to purchase?",
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed:
+                                                      () => Navigator.pop(
+                                                        context,
+                                                        'Cancel',
+                                                      ),
+                                                  child: const Text('Cancel'),
+                                                ),
+                                                TextButton(
+                                                  onPressed:
+                                                      () => Navigator.pop(
+                                                        context,
+                                                        'OK',
+                                                      ),
+                                                  child: const Text('OK'),
+                                                ),
+                                              ],
+                                            ),
+                                      );
+                                    },
+                                    child: CustomButton.black(
+                                      "Make Purchase",
+                                      boxShadow: [
+                                        BoxShadow(
+                                          offset: Offset(9, 9),
+                                          blurRadius: 16,
+                                          color: Color(
+                                            0xFF6295E2,
+                                          ).withValues(alpha: 0.11),
+                                        ),
+                                        BoxShadow(
+                                          offset: Offset(-9, -9),
+                                          blurRadius: 16,
+                                          color: Color(
+                                            0xFFFFFFFF,
+                                          ).withValues(alpha: 0.25),
+                                        ),
+                                      ],
+                                    ),
                                   ),
+
                                   Text(
-                                    "${state.totalPriceOfItems}",
+                                    "${state.totalPriceOfItems}\$",
                                     style: GoogleFonts.cormorantGaramond(
                                       fontSize: 30,
                                       color: Color(0xFF7C3375),
